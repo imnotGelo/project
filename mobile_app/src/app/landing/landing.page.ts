@@ -18,6 +18,7 @@ export class LandingPage implements OnInit {
   isStudent: boolean = false;
   isEnrollDisabled: boolean = false;
 
+
   constructor(private router: Router,
     private apiService: ApiService,
     private navCtrl: NavController) {
@@ -38,6 +39,7 @@ export class LandingPage implements OnInit {
 
   ngOnInit(): void {
     this.getAnnouncements();
+
   }
 
   onFileSelected(event: any) {
@@ -89,12 +91,14 @@ export class LandingPage implements OnInit {
     this.router.navigate(['/calendar']);
   }
   notification() {
-    this.router.navigate(['/notification']);
+    this.navCtrl.navigateForward('/notification', { state: { user: this.user } });
   }
   message() {
     this.router.navigate(['/message']);
   }
-  others() {
-    this.router.navigate(['/others']);
+  schedule() {
+    this.navCtrl.navigateForward('/schedule', { state: { user: this.user } });
   }
+
+
 }

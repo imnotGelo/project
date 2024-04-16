@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'message',
     loadChildren: () => import('./message/message.module').then( m => m.MessagePageModule)
   },
+  {
+    path: 'schedule',
+    loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
+  },
 ];
 
 @NgModule({

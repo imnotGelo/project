@@ -34,14 +34,14 @@
   <ion-card class="studies" *ngFor="let item of filteredResearch">
     <ion-card-header class="head">
       <div class="header-content">
-        <div><strong>{{ truncate(item.title) }}</strong></div>
+        <div><strong class="title">{{ truncate(item.title) }}</strong></div>
         <div class="post-date">{{ item.category }}</div>
       </div>          
     </ion-card-header>
     <ion-card-content class="content">
-      <div *ngIf="item.minimized">
-        Authors: {{ truncate(item.authors) }} {{ item.year_publish }}
-       <div class="abstract"><strong>Abstract:</strong> {{ item.abstract }}</div> 
+      <div *ngIf="item.minimized" class="authors">
+        Authors: <strong>{{ truncate(item.authors) }}</strong> {{ item.year_publish }}
+       <div class="abstract">Abstract: <br>{{ item.abstract }}</div> 
       </div>
       <div class="button-container">
         <button ion-button *ngIf="item.file_path" (click)="viewPdf(item.file_path)" class="pdf-button">

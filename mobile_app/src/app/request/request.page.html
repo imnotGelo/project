@@ -28,12 +28,12 @@
               <ion-select-option value="Form 137">Form 137</ion-select-option>
               <ion-select-option value="Form 138">Form 138</ion-select-option>
               <ion-select-option value="Diploma">Diploma</ion-select-option>
-              <ion-select-option value="Cert. of Gradudation">Cert. of Gradudation</ion-select-option>
+              <ion-select-option value="Cert. of Graduation">Cert. of Graduation</ion-select-option>
               <ion-select-option value="Cert. of Good Moral Character">Cert. of Good Moral Character</ion-select-option>
               <ion-select-option value="Cert. of Honors/Awardees">Cert. of Honors/Awardees</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item class="input" *ngIf="file_requested == 'Diploma' || file_requested == 'Cert. of Gradudation'">
+          <ion-item class="input" *ngIf="file_requested == 'Diploma' || file_requested == 'Cert. of Graduation'">
            <ion-input [(ngModel)]="school_year" label="Year Graduated" label-placement="floating" type="number"></ion-input>
           </ion-item>
         </ion-list>

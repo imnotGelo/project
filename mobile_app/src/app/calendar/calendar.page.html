@@ -12,7 +12,7 @@
   <ion-card class="event" *ngFor="let item of filterEvents()" [ngStyle]="getCardStyle(item)">
     <ion-card-header class="head" >
       <div class="header-content">
-        <div><strong>{{ item.title }}</strong></div>
+        <div><strong class="cal-title">{{ item.title }}</strong></div>
         <div class="post-date">{{ item.start_datetime | date:'mediumDate' }} to {{ item.end_datetime | date:'mediumDate' }}</div>
       </div>
     </ion-card-header>

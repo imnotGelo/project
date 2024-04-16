@@ -49,6 +49,15 @@ ion-content {
     justify-content: space-between;
     align-items: center;
     color: #073965;
+    font-family: 'Hubballi', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .cal-title{
+    font-family: 'Hubballi', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
   }
 
   .event{
@@ -83,6 +92,9 @@ ion-content {
     color: #073965;    
     border-radius: 0 0 10px 10px;
     margin-top: 3px;
+    font-family: 'Hubballi', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
   }
   
 

@@ -1,30 +1,41 @@
 <?php
 include "config.php";
 
-$input = file_get_contents('php://input');
-$data = json_decode($input, true);
-$message = array();
-$LRN = $data['LRN'];
-$firstname = $data['firstname'];
-$middlename = $data['middlename'];
-$lastname = $data['lastname'];
-$email = $data['email'];
-$address = $data['address'];
-$report_card = $data['report_card'];
-$grade_level = $data['grade_level'];
-$strand = isset($data['strand']) ? $data['strand'] : NULL;
+$LRN = $_POST['LRN'];
+$firstname = $_POST['firstname'];
+$middlename = $_POST['middlename'];
+$lastname = $_POST['lastname'];
+$email = $_POST['email'];
+$address = $_POST['address'];
+$grade_level = $_POST['grade_level'];
+$strand = isset($_POST['strand']) ? $_POST['strand'] : NULL;
+
+// Retrieve uploaded file details
+$report_card_tmp_name = $_FILES['report_card']['tmp_name'];
 
 
-$q = mysqli_query($con, "INSERT INTO `studentpending` (`LRN`,`firstname`,`middlename`,`lastname`, `email`,`address`,`grade_level`, `strand`, `report_card`)
- VALUES ('$LRN', '$firstname','$middlename', '$lastname', '$email', '$address','$grade_level','$strand', '$report_card')");
-
-if ($q) {
-    http_response_code(201);
-        $message['status'] = "Success";
-} else {
-    http_response_code(422);
+$check_query = mysqli_query($con, "SELECT * FROM studentpending WHERE LRN = '$LRN'");
+if (mysqli_num_rows($check_query) > 0) {
+    http_response_code(409);
     $message['status'] = "Error";
-    $message['error'] = mysqli_error($con);
+    $message['error'] = "LRN already exists in the database.";
+} else {
+    $stmt = $con->prepare("INSERT INTO `studentpending` (`LRN`, `firstname`, `middlename`, `lastname`, `email`, `address`, `grade_level`, `strand`, `report_card`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $null = NULL;
+    $stmt->bind_param("ssssssssb", $LRN, $firstname, $middlename, $lastname, $email, $address, $grade_level, $strand, $null);
+
+    // Read file contents into database as BLOB
+    $report_card_content = file_get_contents($report_card_tmp_name);
+    $stmt->send_long_data(8, $report_card_content); // Bind BLOB data
+
+    if ($stmt->execute()) {
+        http_response_code(201);
+        $message['status'] = "Success";
+    } else {
+        http_response_code(422); // Unprocessable Entity status code
+        $message['status'] = "Error";
+        $message['error'] = mysqli_error($con);
+    }
 }
 
 echo json_encode($message);

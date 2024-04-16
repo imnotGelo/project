@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -8,18 +8,24 @@ import { ApiService } from '../api.service';
   styleUrls: ['./notification.page.scss'],
 })
 export class NotificationPage implements OnInit {
+  user: any;
   items: any[] = [];
   event: any[] = [] ;
   selectedMonth: any = new Date();
-
+  
   constructor(private router: Router,
-    private apiService: ApiService) { }
+    private apiService: ApiService) { 
+      const navigation = this.router.getCurrentNavigation();
+      if (navigation && navigation.extras && navigation.extras.state) {
+        this.user = navigation.extras.state['user'];
+      } 
+    }
 
   ngOnInit() {
     this.getAnnouncements();
     this.events();
-
-  }
+    this.status();
+    }
 
   back() {
     this.router.navigate(['/landing']);
@@ -88,6 +94,29 @@ export class NotificationPage implements OnInit {
       currentDate.setDate(currentDate.getDate() + 1);
     }
     return dates;
+  }
+
+  status(){
+    if (!this.user || !this.user.LRN) {
+      console.error('LRN not available');
+      return;
+    }
+
+    const LRN = {
+      LRN : this.user.LRN,
+    }
+    this.apiService.checkApplicationStatus(LRN).subscribe(
+      (res: any) => {
+        this.user.applicationStatus = res.message;
+      },
+      (error) => {
+        console.error('Error fetching application status:', error);
+      }
+    );
+  }
+
+  toggleApplicationStatusMinimized(): void {
+    this.user.applicationStatusMinimized = !this.user.applicationStatusMinimized;
   }
   
 

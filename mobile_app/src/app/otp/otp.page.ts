@@ -81,7 +81,7 @@ export class OtpPage implements OnInit {
   }
 
   startTimer(): void {
-    const timerLimit = 1 * 5;
+    const timerLimit = 3 * 60;
     let timer = timerLimit;
     this.timer = setInterval(() => {
       this.minutes = Math.floor(timer / 60);

@@ -21,7 +21,6 @@ export class EnrollPage implements OnInit {
   strand:any;
 
 
-
   constructor(private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
@@ -31,11 +30,12 @@ export class EnrollPage implements OnInit {
       this.user = navigation.extras.state['user'];
     }    
   }
+
   isOld = false;
   onCheckboxChange(event: any) {
     this.isOld = event.target.checked;
   }
-
+  
   ngOnInit() {
   }
 
@@ -66,15 +66,38 @@ export class EnrollPage implements OnInit {
     this.router.navigate(['/landing'])
   }
 
+  async DuplicateAlert() {
+    const alert = await this.alertController.create({
+      header: 'Duplicate Submission',
+      message: 'Your application has already been received. Kindly wait for your email to confirm your enrollment status.',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  onFileChange(event: any, fileType: string) {
+    const file = event.target.files[0];
+    if (fileType === 'report_card') {
+      this.report_card = file;
+    } else if (fileType === 'good_moral') {
+      this.good_moral = file;
+    } else if (fileType === 'birth_cert') {
+      this.birth_cert = file;
+    } else if (fileType === 'cert_trans') {
+      this.cert_trans = file;
+    }
+  }
+
 
   addStudent(studentData: any) {
     this.apiService.addStudent(studentData).subscribe(
       (res: any) => {
         console.log("SUCCESS ===", res);
+        if (res.status === 'Success') {
+          this.success(); 
+        }
       },
       (error: any) => {
-        alert('Try Again');
-        console.log("ERROR ===", error);
+        this.DuplicateAlert();
       }
     );
   }
@@ -83,10 +106,12 @@ export class EnrollPage implements OnInit {
     this.apiService.addOldStudent(oldstudentData).subscribe(
       (res: any) => {
         console.log("SUCCESS ===", res);
+        if (res.status === 'Success') {
+          this.success(); 
+        }
       },
       (error: any) => {
-        alert('Try Again');
-        console.log("ERROR ===", error);
+        this.DuplicateAlert();
       }
     );
   }
@@ -97,57 +122,45 @@ export class EnrollPage implements OnInit {
       return;
     }
   
-    const studentData = {
-      LRN: this.user.LRN,
-      firstname: this.user.firstname,
-      middlename: this.user.middlename,
-      lastname: this.user.lastname,
-      email: this.user.email,
-      address: this.user.address,
-      report_card: this.report_card,
-      grade_level: this.grade_level,
-      strand: this.strand,
-      good_moral: this.good_moral,
-      birth_cert: this.birth_cert,
-      cert_trans: this.cert_trans,
-    };
+    const newData = new FormData();
+    newData.append('LRN', this.user.LRN);
+    newData.append('firstname', this.user.firstname);
+    newData.append('middlename', this.user.middlename);
+    newData.append('lastname', this.user.lastname);
+    newData.append('email', this.user.email);
+    newData.append('address', this.user.address);
+    newData.append('report_card', this.report_card);
+    newData.append('good_moral', this.good_moral);
+    newData.append('birth_cert', this.birth_cert);
+    newData.append('cert_trans', this.cert_trans);
+    newData.append('grade_level', this.grade_level);
 
     if (this.grade_level === '11' || this.grade_level === '12') {
-      studentData.strand = this.strand;
+      newData.append('strand', this.strand);
     }
-    
-    this.addStudent(studentData);
-    this.success();
+    this.addStudent(newData);
   }
 
-  
-
-  OldEnroll(){
-    if (!this.report_card || !this.grade_level){
+  OldEnroll() {
+    if (!this.report_card || !this.grade_level) {
       this.presentValidationErrorAlert();
       return;
     }
   
-    const oldstudentData = {
-      LRN: this.user.LRN,
-      firstname: this.user.firstname,
-      middlename: this.user.middlename,
-      lastname: this.user.lastname,
-      email: this.user.email,
-      address: this.user.address,
-      report_card: this.report_card,
-      grade_level: this.grade_level,
-      strand: this.strand,
-      good_moral: this.good_moral,
-      birth_cert: this.birth_cert,
-      cert_trans: this.cert_trans,
-    };
+    const formData = new FormData();
+    formData.append('LRN', this.user.LRN);
+    formData.append('firstname', this.user.firstname);
+    formData.append('middlename', this.user.middlename);
+    formData.append('lastname', this.user.lastname);
+    formData.append('email', this.user.email);
+    formData.append('address', this.user.address);
+    formData.append('report_card', this.report_card);
+    formData.append('grade_level', this.grade_level);
 
     if (this.grade_level === '11' || this.grade_level === '12') {
-      oldstudentData.strand = this.strand;
+      formData.append('strand', this.strand);
     }
-      this.addOldStudent(oldstudentData);
-      this.success();
+  
+    this.addOldStudent(formData);
   }
-
 }

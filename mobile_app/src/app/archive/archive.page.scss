@@ -36,11 +36,11 @@ ion-button{
 
 .announce{
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-size: 20px;
   text-align: center;
-  margin-top: 15%;
+  margin-top: 19%;
   color: white;
 }
 
@@ -94,8 +94,16 @@ ion-button{
   margin-right: 1rem; 
 }
 
+.authors{
+  margin-top: 10px;
+  font-family: 'Hubballi', sans-serif;
+  font-size: 18px;
+}
+
 .abstract{
   margin-top: 10px;
+  font-family: 'Hubballi', sans-serif;
+  font-size: 15px;
 }
 
 .pop{
@@ -109,6 +117,11 @@ ion-popover {
 
 .pop:hover {
   --color: #88cafc;
+}
+
+.title{
+  font-family: 'Hubballi', sans-serif;
+  font-size: 17px;
 }
 
 

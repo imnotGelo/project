@@ -92,17 +92,20 @@ input[type='file'] {
 
 .action-card svg.icon {
  margin-top: auto;
+ margin-bottom: 3px;
 }
 
 
 .action-card p {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Hubballi', sans-serif;
   margin-top: -1rem;
-  font-size: 0.8rem;
+  font-size: 13px;
+  color: #073965;
+  font-weight: bolder;
 }
 
 .announce{
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 20px;
@@ -137,6 +140,9 @@ input[type='file'] {
 .content{
   background-color: #eaf7ff;
   margin-top: 3px;
+  font-family: 'Hubballi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .dim {
@@ -147,6 +153,25 @@ input[type='file'] {
 .action-card.dimmed {
   opacity: 0.5; /* Adjust opacity as needed */
   pointer-events: none; /* Prevent clicks on the card */
+}
+
+.button-title{
+  font-family: 'Hubballi', sans-serif;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: none; /* Initially hide the dot */
+}
+
+.dot.active {
+  display: block; /* Show the dot when active */
 }
 
 
