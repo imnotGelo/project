@@ -38,7 +38,7 @@ if ($result->num_rows == 1) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $isStudent = $result->num_rows == 1; // Check if LRN is in students table
+    $isStudent = $result->num_rows == 1;
 
     if ($isStudent) {
         $row = $result->fetch_assoc();

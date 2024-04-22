@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend+Deca:wght@100..900&display=swap');
 ion-content {
   --ion-background-color: #eaf7ff;
+}
+
+.logout{
+  position: absolute;
+  top: 10px; 
+  right: 15px; 
+  padding: 8px 12px;
+  background-color: #2660A4;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Hubballi', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .container {
@@ -13,7 +27,7 @@ ion-content {
 }
 
 .info {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-style: normal;
   display: flex;
@@ -60,9 +74,9 @@ input[type='file'] {
 }
 
 .user-details {
-  font-family: "Poppins", sans-serif;
-  font-weight:400;
-  font-style: normal;
+  font-family: 'Hubballi', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
   display: flex;
   flex-direction: column;
   margin-left: 5rem;
@@ -134,7 +148,9 @@ input[type='file'] {
 }
 
 .post-date {
-  color: #666; /* Or any other color */
+  color: #666; 
+  font-family: 'Hubballi', sans-serif;
+  font-size: 15px;
 }
 
 .content{
@@ -160,18 +176,12 @@ input[type='file'] {
 }
 
 .dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: #2660A4;
   border-radius: 50%;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: none; /* Initially hide the dot */
 }
-
-.dot.active {
-  display: block; /* Show the dot when active */
-}
-
 

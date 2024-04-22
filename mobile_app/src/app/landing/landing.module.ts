@@ -8,6 +8,8 @@ import { LandingPageRoutingModule } from './landing-routing.module';
 
 import { LandingPage } from './landing.page';
 
+import { DatePipe } from '@angular/common'; 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { LandingPage } from './landing.page';
     IonicModule,
     LandingPageRoutingModule
   ],
-  declarations: [LandingPage]
+  declarations: [LandingPage],
+  providers: [DatePipe],
 })
 export class LandingPageModule {}

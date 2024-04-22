@@ -25,16 +25,10 @@
       </ion-grid>
       <p class="subject">Subject</p>
 
-      <ion-row class="subject-name">
-        <ion-col>{{ user.sectionData.subject_1 }}</ion-col>
-        <ion-col>{{ formatTime(user.sectionData.time_start_1) }}</ion-col>
-        <ion-col>{{ formatTime(user.sectionData.time_end_1) }}</ion-col>
-      </ion-row>
-
-      <ion-row class="subject-name">
-        <ion-col>{{ user.sectionData.subject_2 }}</ion-col>
-        <ion-col>{{ formatTime(user.sectionData.time_start_2) }}</ion-col>
-        <ion-col>{{ formatTime(user.sectionData.time_end_2) }}</ion-col>
+      <ion-row class="subject-name" *ngFor="let subject of getSubjects()">
+        <ion-col class="title">{{ subject.name }}</ion-col>
+        <ion-col>{{ formatTime(subject.time_start) }}</ion-col>
+        <ion-col>{{ formatTime(subject.time_end) }}</ion-col>
       </ion-row>
 
     </ion-card-content>

@@ -31,39 +31,31 @@ if (mysqli_num_rows($check_query) > 0) {
     exit;
 }
 
-// Prepare SQL statement for insertion
 $stmt = $con->prepare("INSERT INTO `studentpending` (`LRN`, `firstname`, `middlename`, `lastname`, `email`, `address`, `grade_level`, `strand`, `report_card`, `good_moral`, `cert_trans`, `birth_cert`) 
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-// Bind parameters
 $stmt->bind_param("ssssssssssss", $LRN, $firstname, $middlename, $lastname, $email, $address, $grade_level, $strand, $report_card_content, $good_moral_content, $cert_trans_content, $birth_cert_content);
 
-// Read and bind BLOB data for report_card
 $report_card_content = file_get_contents($report_card_tmp_name);
 $stmt->send_long_data(8, $report_card_content);
 
-// Read and bind BLOB data for good_moral
 $good_moral_content = file_get_contents($good_moral_tmp_name);
 $stmt->send_long_data(9, $good_moral_content);
 
-// Read and bind BLOB data for cert_trans
 $cert_trans_content = file_get_contents($cert_trans_tmp_name);
 $stmt->send_long_data(10, $cert_trans_content);
 
-// Read and bind BLOB data for birth_cert
 $birth_cert_content = file_get_contents($birth_cert_tmp_name);
 $stmt->send_long_data(11, $birth_cert_content);
 
-// Execute SQL statement
 if ($stmt->execute()) {
-    http_response_code(201); // Created status code
+    http_response_code(201); 
     $message['status'] = "Success";
 } else {
-    http_response_code(422); // Unprocessable Entity status code
+    http_response_code(422);
     $message['status'] = "Error";
     $message['error'] = $stmt->error;
 }
 
-// Output response message as JSON
 echo json_encode($message);
 ?>

@@ -12,7 +12,9 @@ export class NotificationPage implements OnInit {
   items: any[] = [];
   event: any[] = [] ;
   selectedMonth: any = new Date();
-  
+  hasNewNotification: boolean = false;
+
+
   constructor(private router: Router,
     private apiService: ApiService) { 
       const navigation = this.router.getCurrentNavigation();
@@ -27,9 +29,9 @@ export class NotificationPage implements OnInit {
     this.status();
     }
 
-  back() {
-    this.router.navigate(['/landing']);
-  }
+    back(){
+      this.router.navigate(['/landing'])
+    }
   
   toggleMinimized(item: any): void {
     item.minimized = !item.minimized;
@@ -40,19 +42,7 @@ export class NotificationPage implements OnInit {
       (res: any) => {
         // Sort announcements by post_date in ascending order
         this.items = res.sort((a: { post_date: string | number | Date; }, b: { post_date: string | number | Date; }) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime());
-      },
-      (error: any) => {
-        alert('Try Again');
-        console.log('ERROR ===', error);
-      }
-    );
-  }
-
-  events() {
-    this.apiService.getScheduleList().subscribe(
-      (res: any) => {
-        // Sort events by start_datetime in ascending order
-        this.event = res.sort((a: { start_datetime: string | number | Date; }, b: { start_datetime: string | number | Date; }) => new Date(a.start_datetime).getTime() - new Date(b.start_datetime).getTime());
+        this.hasNewNotification = true;
       },
       (error: any) => {
         alert('Try Again');
@@ -69,6 +59,20 @@ export class NotificationPage implements OnInit {
         eventDate.getFullYear() === this.selectedMonth.getFullYear()
       );
     });
+  }
+
+  events() {
+    this.apiService.getScheduleList().subscribe(
+      (res: any) => {
+        // Sort events by start_datetime in ascending order
+        this.event = res.sort((a: { start_datetime: string | number | Date; }, b: { start_datetime: string | number | Date; }) => new Date(a.start_datetime).getTime() - new Date(b.start_datetime).getTime());
+        this.hasNewNotification = true;
+      },
+      (error: any) => {
+        alert('Try Again');
+        console.log('ERROR ===', error);
+      }
+    );
   }
 
   filterEvents() {
@@ -108,6 +112,7 @@ export class NotificationPage implements OnInit {
     this.apiService.checkApplicationStatus(LRN).subscribe(
       (res: any) => {
         this.user.applicationStatus = res.message;
+        this.hasNewNotification = true;
       },
       (error) => {
         console.error('Error fetching application status:', error);
@@ -118,6 +123,5 @@ export class NotificationPage implements OnInit {
   toggleApplicationStatusMinimized(): void {
     this.user.applicationStatusMinimized = !this.user.applicationStatusMinimized;
   }
-  
 
 }
