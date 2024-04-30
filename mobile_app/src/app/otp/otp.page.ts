@@ -81,7 +81,7 @@ export class OtpPage implements OnInit {
   }
 
   startTimer(): void {
-    const timerLimit = 3 * 60;
+    const timerLimit = 3 * 5;
     let timer = timerLimit;
     this.timer = setInterval(() => {
       this.minutes = Math.floor(timer / 60);
@@ -96,24 +96,4 @@ export class OtpPage implements OnInit {
     }, 1000);
   }
 
-  requestNewOTP() {
-    this.apiService.requestNewOTP().subscribe(
-      (res: any) => {
-        if (res.status === 'Success') {
-          clearInterval(this.timer);
-          this.timerExpired = false;
-          this.timerVisible = true;
-          this.startTimer();
-          alert('A new OTP has been sent to your email.');
-        } else {
-          console.error('Failed to request new OTP:', res.error);
-          alert('Failed to request new OTP. Please try again.');
-        }
-      },
-      (err) => {
-        console.error('Error requesting new OTP:', err);
-        alert('An error occurred while requesting new OTP. Please try again.');
-      }
-    );
-  }
 }

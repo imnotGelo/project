@@ -1,0 +1,19 @@
+/* CSS to position the button and center the h1 */
+.back-button {
+    font-family: 'Hubballi', sans-serif;
+    position: absolute;
+    top: 20px;
+    margin: 10px;
+    --border-radius: 10px;
+    --background: linear-gradient(to top, #073965, #074276, #0F4C81, #155790, #1B609D);
+  }
+  
+  .title {
+    font-family: 'Hubballi', sans-serif;
+    font-weight: bold;
+    text-align: center; 
+    margin-top: 80px; 
+    font-size: 24px; 
+    color: #000;
+  }
+  

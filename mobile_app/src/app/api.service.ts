@@ -35,13 +35,8 @@ export class ApiService {
   }
 
   verifyOtp(requestBody : any) {
-    return this.http.post(`${this.baseUrl}/create.php/verifyOtp.php`, requestBody);
-  }
-  
-  requestNewOTP() {
-    const requestBody = { request_new_otp: true };
-    return this.http.post(`${this.baseUrl}/create.php`, requestBody);
-  }  
+    return this.http.post(`${this.baseUrl}/verifyOtp.php`, requestBody);
+  } 
 
   login(LRN:number, password: string){
     return this.http.post(`${this.baseUrl}/login.php`, { LRN, password });

@@ -52,6 +52,10 @@ export class LoginPage implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
 
+  forgotpw() {
+    this.router.navigate(['/forgot-password']);
+  }
+
   signUp() {
     this.router.navigate(['/sign-up']);
   }

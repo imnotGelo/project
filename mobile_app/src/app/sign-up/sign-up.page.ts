@@ -31,6 +31,10 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
+  back() {
+    this.router.navigate(['/login']);
+  }
+
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Registration Error',

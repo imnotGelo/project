@@ -19,21 +19,29 @@ export class EnrollPage implements OnInit {
   report_card: any;
   grade_level:any;
   strand:any;
+  isStudent: boolean = false;
+  isOld: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
     private alertController: AlertController) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation && navigation.extras && navigation.extras.state) {
-      this.user = navigation.extras.state['user'];
-    }    
+      const navigation = this.router.getCurrentNavigation();
+      if (navigation?.extras?.state) {
+        const userData = navigation.extras.state['user'];
+        if (userData && userData.studentData && userData.sectionData) {
+          this.user = userData;
+          this.isStudent = true;
+        } else {
+          this.user = userData;
+          this.isStudent = false;
+        }
+      }  
   }
 
-  isOld = false;
-  onCheckboxChange(event: any) {
-    this.isOld = event.target.checked;
+  setIsOld(isOld: boolean) {
+    this.isOld = isOld;
   }
   
   ngOnInit() {

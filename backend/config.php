@@ -12,5 +12,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-$con = mysqli_connect("localhost", "root", "", "oras") or die ("could not be connect DB");
+$con = mysqli_connect("localhost", "root", "", "oras_alic") or die ("could not be connect DB");
 ?>

@@ -1,11 +1,6 @@
 <?php
 include "config.php";
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Retrieve POST data
 $LRN = $_POST['LRN'];
 $firstname = $_POST['firstname'];
 $middlename = $_POST['middlename'];

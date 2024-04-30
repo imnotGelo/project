@@ -75,7 +75,7 @@ export class RequestPage implements OnInit {
       this.user.firstname &&
       this.user.lastname &&
       this.user.email &&
-      this.file_requested // Ensure file_requested is filled
+      this.file_requested
     );
   }
   

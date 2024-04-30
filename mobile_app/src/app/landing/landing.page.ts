@@ -144,7 +144,7 @@ export class LandingPage implements OnInit {
     this.router.navigate(['/archive']);
   }
   grade() {
-    this.router.navigate(['/grades']);
+    this.navCtrl.navigateForward('/grades', { state: { user: this.user } });
   }
   calendar() {
     this.router.navigate(['/calendar']);
@@ -154,7 +154,7 @@ export class LandingPage implements OnInit {
     this.hasNewNotification = false;
   }
   message() {
-    this.router.navigate(['/message']);
+    this.navCtrl.navigateForward('/message', { state: { user: this.user } });
   }
   schedule() {
     this.navCtrl.navigateForward('/schedule', { state: { user: this.user } });

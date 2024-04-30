@@ -14,8 +14,8 @@
 
     <button (click)="verifyOTP()" [disabled]="timerExpired">Verify</button><br>
     <div *ngIf="timerVisible">
-      <p>Time remaining: {{ minutes }}:{{ seconds }}</p>
+      <p>Expires at: {{ minutes }}:{{ seconds }}</p>
     </div>
-    <button *ngIf="timerExpired" (click)="requestNewOTP()">Request New OTP</button>
+    <button *ngIf="timerExpired" >Request New OTP</button>
   </div>
 </ion-content>

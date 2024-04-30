@@ -26,15 +26,14 @@ ion-router-outlet {
 }
 
 .back-button {
-    font-family: "Righteous", sans-serif;
-  font-weight: bold;
-  font-style: normal;
-    position:absolute;
-    top: 20px; 
-    left: 1rem;
-    margin: 10px;
-    --background: #2660A4;
-  }
+  font-family: 'Hubballi', sans-serif;
+  position:absolute;
+  top: 20px; 
+  left: 1rem;
+  margin: 10px;
+  --border-radius: 10px;
+  --background: linear-gradient(to top, #073965, #074276, #0F4C81, #155790, #1B609D);
+}
 
   .regis{
     font-family: 'Hubballi', sans-serif;

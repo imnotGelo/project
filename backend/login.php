@@ -46,6 +46,7 @@ if ($result->num_rows == 1) {
             'strand' => $row['strand'],
             'grade_level' => $row['grade_level'],
             'section_id' => $row['section_id'],
+            'report_card' => $row['report_card']
         );
         $userData['studentData'] = $studentData;
     
@@ -60,6 +61,18 @@ if ($result->num_rows == 1) {
             $sectionData = $result->fetch_assoc();
             $userData['sectionData'] = $sectionData;
         }
+
+        // Fetch grading details using section_id or LRN
+        $stmt = $con->prepare("SELECT * FROM grades WHERE section_id = ? AND LRN = ?");
+        $stmt->bind_param("ss", $section_id, $LRN);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $grades = array();
+        while ($row = $result->fetch_assoc()) {
+            $grades[] = $row;
+        }
+        $userData['grades'] = $grades;
     }
 
     http_response_code(200);
